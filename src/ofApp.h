@@ -23,15 +23,10 @@ class ofApp : public ofBaseApp{
     
         void plot(vector<float>& buffer, float scale, float offset);
 				
-		void audioIn(float * input, int bufferSize, int nChannels); 
-	
-		vector <float> left;
-		vector <float> right;
-		vector <float> volHistory;
+		void audioIn(float * input, int bufferSize, int nChannels);
+    
         vector <float> drawBins, middleBins, audioBins;
 		
-		int 	bufferCounter;
-		int 	drawCounter;
         int     plotHeight;
         int     bufferSize;
 		
