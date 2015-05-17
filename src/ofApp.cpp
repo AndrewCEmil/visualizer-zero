@@ -72,8 +72,14 @@ void ofApp::plot(vector<float>& buffer, float scale, float offset) {
     glPushMatrix();
     glTranslatef(0, plotHeight / 2 + offset, 0);
     ofBeginShape();
-    for (int i = 0; i < n; i++) {
-        ofVertex(i, sqrt(buffer[i]) * scale);
+    double avg = 0;
+    for (int i = 0; i < n; i += 50) {
+        avg = 0;
+        for (int j = 0; j < 50 && i + j < n; j++) {
+            avg += sqrt(buffer[i + j]);
+        }
+        avg = (avg / std::min(50, n - i));
+        ofVertex(i, avg * scale);
     }
     ofEndShape();
     glPopMatrix();
