@@ -13,10 +13,10 @@ void ofApp::setup(){
 	// 256 samples per buffer
 	// 4 num buffers (latency)
 	
-	//soundStream.listDevices();
+	soundStream.listDevices();
 	
 	//if you want to set a different device id 
-	soundStream.setDeviceID(0); //bear in mind the device id corresponds to all audio devices, including  input-only and output-only devices.
+	soundStream.setDeviceID(1); //bear in mind the device id corresponds to all audio devices, including  input-only and output-only devices.
 		
 	smoothedVol     = 0.0;
 	scaledVol		= 0.0;
@@ -41,6 +41,14 @@ void ofApp::update(){ }
 //--------------------------------------------------------------
 void ofApp::draw(){
 	ofNoFill();
+    ofColor colorOne;
+    ofColor colorTwo;
+    
+    colorOne.set (255, 0, 0);
+    colorTwo.set (0, 0, 255);
+    
+    ofEnableAlphaBlending();
+    ofBackgroundGradient(colorOne, colorTwo, OF_GRADIENT_LINEAR);
 
 	// draw the frequency domain:
 	ofPushStyle();
@@ -62,6 +70,13 @@ void ofApp::draw(){
     
         ofPopMatrix();
 	ofPopStyle();
+    
+    ofPushStyle();
+    ofFill();
+    ofSetColor(0, 0, 0, 256);
+    ofRect(0, plotHeight, drawBins.size(), 768 - plotHeight);
+    ofPopStyle();
+
 }
 
 //--------------------------------------------------------------
@@ -77,14 +92,29 @@ void ofApp::plot(vector<float>& buffer, float scale, float offset) {
         avg = 0;
         for (int j = 0; j < 50 && i + j < n; j++) {
             avg += sqrt(buffer[i + j]);
+            ofVertex(i + j, sqrt(buffer[i + j]) * scale);
         }
         avg = (avg / std::min(50, n - i));
+
         ofPushStyle();
-            ofFill();
-            val = avg * scale;
-            ofSetColor(abs(val), 256 - abs(val), 0);
-            ofRect(i, 0, 50, val);
+        ofFill();
+        ofSetColor(0, 0, 0, 256);
+        ofRect(i, avg * scale, 50, - (plotHeight - (avg * scale)));
         ofPopStyle();
+        
+        /*
+        for (int y = 0; y < 512; y += 30) {
+            val = avg * scale;
+            if (abs(val) > y) {
+                ofPushStyle();
+                ofFill();
+                //ofSetColor(y, 256 - y, ((double)i / (double)n) * 256.0);
+                ofSetColor(0, 0, 0, 0);
+                //ofRect(i, -y, 50, 50);
+                ofCircle(i + 10, -y, 10);
+                ofPopStyle();
+            }
+        }*/
     }
     glPopMatrix();
 }
