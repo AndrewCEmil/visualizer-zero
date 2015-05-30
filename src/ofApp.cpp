@@ -30,6 +30,9 @@ void ofApp::setup(){
     drawBins.resize(fft->getBinSize());
     middleBins.resize(fft->getBinSize());
     audioBins.resize(fft->getBinSize());
+    
+    shader.load("shadersGL3/shader");
+    shader.setUniform1f("myUniform", 1.f);
 
 	soundStream.setup(this, 0, 2, 44100, bufferSize, 4);
 
@@ -40,17 +43,26 @@ void ofApp::update(){ }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+        /*
+    ofSetColor(255);
+    shader.begin();
+    ofRect(0, 0, 256, 256);
+    shader.end();
+     */
+    
+    /*
 	ofNoFill();
-    ofColor colorOne;
-    ofColor colorTwo;
+    //ofColor colorOne;
+    //ofColor colorTwo;
     
-    colorOne.set (255, 0, 0);
-    colorTwo.set (0, 0, 255);
+    //colorOne.set (255, 0, 0);
+    //colorTwo.set (0, 0, 255);
     
-    ofEnableAlphaBlending();
-    ofBackgroundGradient(colorOne, colorTwo, OF_GRADIENT_LINEAR);
+    //ofEnableAlphaBlending();
+    //ofBackgroundGradient(colorOne, colorTwo, OF_GRADIENT_LINEAR);
 
 	// draw the frequency domain:
+    */
 	ofPushStyle();
 		ofPushMatrix();
 		//ofTranslate(32, 370, 0);
@@ -70,22 +82,25 @@ void ofApp::draw(){
     
         ofPopMatrix();
 	ofPopStyle();
-    
+    /*
     ofPushStyle();
     ofFill();
     ofSetColor(0, 0, 0, 256);
     ofRect(0, plotHeight, drawBins.size(), 768 - plotHeight);
     ofPopStyle();
-
+     */
 }
 
 //--------------------------------------------------------------
 void ofApp::plot(vector<float>& buffer, float scale, float offset) {
-    ofNoFill();
+    ofSetColor(255);
+
+    //ofNoFill();
+    //ofRect(0, 0, n, plotHeight);
+    //glPushMatrix();
+    //glTranslatef(0, plotHeight / 2 + offset, 0);
     int n = buffer.size();
-    ofRect(0, 0, n, plotHeight);
-    glPushMatrix();
-    glTranslatef(0, plotHeight / 2 + offset, 0);
+
     double avg = 0;
     double val = 0;
     for (int i = 0; i < n; i += 50) {
@@ -96,31 +111,19 @@ void ofApp::plot(vector<float>& buffer, float scale, float offset) {
         }
         avg = (avg / std::min(50, n - i));
 
-        ofPushStyle();
-        ofFill();
-        ofSetColor(0, 0, 0, 256);
-        ofRect(i, avg * scale, 50, - (plotHeight - (avg * scale)));
-        ofPopStyle();
+        std::cout << "YO YO Yo " << std::endl;
+        std::cout << "i: " << i << ", avg: " << avg << ", height:" << plotHeight - (avg * scale)<< std::endl;
+        shader.begin();
+        ofRect(i, 0, 50, plotHeight - (avg * scale));
+        shader.end();
+        //ofPopStyle();
         
-        /*
-        for (int y = 0; y < 512; y += 30) {
-            val = avg * scale;
-            if (abs(val) > y) {
-                ofPushStyle();
-                ofFill();
-                //ofSetColor(y, 256 - y, ((double)i / (double)n) * 256.0);
-                ofSetColor(0, 0, 0, 0);
-                //ofRect(i, -y, 50, 50);
-                ofCircle(i + 10, -y, 10);
-                ofPopStyle();
-            }
-        }*/
     }
-    glPopMatrix();
+    //glPopMatrix();
 }
 
 //--------------------------------------------------------------
-void ofApp::audioIn(float * input, int bufferSize, int nChannels){
+void ofApp::audioIn(float * input, int bufferSize, int nChannels) {
     //FFT section
     float maxValue = 0;
     for(int i = 0; i < bufferSize; i++) {

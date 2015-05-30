@@ -35,6 +35,7 @@ class ofApp : public ofBaseApp{
     
         ofxFft* fft;
 		
-    ofMutex soundMutex;
+        ofMutex soundMutex;
 		ofSoundStream soundStream;
+        ofShader shader;
 };
