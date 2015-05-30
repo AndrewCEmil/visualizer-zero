@@ -32,7 +32,7 @@ void ofApp::setup(){
     audioBins.resize(fft->getBinSize());
     
     shader.load("shadersGL3/shader");
-    shader.setUniform1f("myUniform", 1.f);
+    
 
 	soundStream.setup(this, 0, 2, 44100, bufferSize, 4);
 
@@ -43,34 +43,11 @@ void ofApp::update(){ }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-        /*
-    ofSetColor(255);
-    shader.begin();
-    ofRect(0, 0, 256, 256);
-    shader.end();
-     */
-    
-    /*
-	ofNoFill();
-    //ofColor colorOne;
-    //ofColor colorTwo;
-    
-    //colorOne.set (255, 0, 0);
-    //colorTwo.set (0, 0, 255);
-    
-    //ofEnableAlphaBlending();
-    //ofBackgroundGradient(colorOne, colorTwo, OF_GRADIENT_LINEAR);
-
-	// draw the frequency domain:
-    */
 	ofPushStyle();
 		ofPushMatrix();
-		//ofTranslate(32, 370, 0);
-			
-
+    
 		ofSetColor(225);
 		ofDrawBitmapString("Frequency domain", 4, 18);
-    
         string msg = ofToString((int) ofGetFrameRate()) + " fps";
         ofDrawBitmapString(msg, 50, 100);
     
@@ -82,27 +59,13 @@ void ofApp::draw(){
     
         ofPopMatrix();
 	ofPopStyle();
-    /*
-    ofPushStyle();
-    ofFill();
-    ofSetColor(0, 0, 0, 256);
-    ofRect(0, plotHeight, drawBins.size(), 768 - plotHeight);
-    ofPopStyle();
-     */
 }
 
 //--------------------------------------------------------------
 void ofApp::plot(vector<float>& buffer, float scale, float offset) {
     ofSetColor(255);
-
-    //ofNoFill();
-    //ofRect(0, 0, n, plotHeight);
-    //glPushMatrix();
-    //glTranslatef(0, plotHeight / 2 + offset, 0);
     int n = buffer.size();
-
     double avg = 0;
-    double val = 0;
     for (int i = 0; i < n; i += 50) {
         avg = 0;
         for (int j = 0; j < 50 && i + j < n; j++) {
@@ -111,15 +74,11 @@ void ofApp::plot(vector<float>& buffer, float scale, float offset) {
         }
         avg = (avg / std::min(50, n - i));
 
-        std::cout << "YO YO Yo " << std::endl;
-        std::cout << "i: " << i << ", avg: " << avg << ", height:" << plotHeight - (avg * scale)<< std::endl;
         shader.begin();
+        shader.setUniform1f("myUniform", ofGetElapsedTimef());
         ofRect(i, 0, 50, plotHeight - (avg * scale));
         shader.end();
-        //ofPopStyle();
-        
     }
-    //glPopMatrix();
 }
 
 //--------------------------------------------------------------
