@@ -22,7 +22,8 @@ void ofApp::setup(){
 	scaledVol		= 0.0;
     
     //FFT stuff
-    plotHeight = 512;
+    plotHeight = 768;
+    plotWidth = 1024;
     bufferSize = 2048;
     
     fft = ofxFft::create(bufferSize, OF_FFT_WINDOW_HAMMING, OF_FFT_FFTW);
@@ -66,19 +67,41 @@ void ofApp::plot(vector<float>& buffer, float scale, float offset) {
     ofSetColor(255);
     int n = buffer.size();
     double avg = 0;
-    for (int i = 0; i < n; i += 50) {
+    int leftx = 0;
+    int lefty = 0;
+    int rightx = 0;
+    int righty = 0;
+    for (int i = 0; i < 2; i++) {
         avg = 0;
-        for (int j = 0; j < 50 && i + j < n; j++) {
+        for (int j = 0; j < buffer.size() / (2 - i); j++) {
             avg += sqrt(buffer[i + j]);
-            ofVertex(i + j, sqrt(buffer[i + j]) * scale);
         }
-        avg = (avg / std::min(50, n - i));
+        avg = (avg / (buffer.size() / 2));
 
-        shader.begin();
-        shader.setUniform1f("myUniform", ofGetElapsedTimef());
-        ofRect(i, 0, 50, plotHeight - (avg * scale));
-        shader.end();
+        if(i == 0) {
+            leftx = buffer.size() / 4;
+            lefty = plotHeight - (avg * scale);
+        } else {
+            rightx = 3 * buffer.size() / 4;
+            righty = plotHeight - (avg * scale);
+        }
     }
+    
+    float leftdist = sqrt((((float(plotWidth) /2) - leftx) * ((float(plotWidth) /2) - leftx)) + (((float(plotHeight) /2) - lefty) * ((float(plotWidth) /2) - lefty)));
+    float rightdist = sqrt((((float(plotWidth) /2)  - rightx) * ((float(plotWidth) /2)  - rightx)) + (((float(plotWidth) /2) - righty) * ((float(plotWidth) /2) - righty)));
+    float result = (leftdist + rightdist) / 2.0;
+    shader.begin();
+    std::cout << "leftx: " << float(leftx) << std::endl;
+    shader.setUniform1f("leftxv", float(leftx));
+    std::cout << "lefty: " << float(lefty) << std::endl;
+    shader.setUniform1f("leftyv", float(lefty));
+    std::cout << "rightx: " << float(rightx) << std::endl;
+    shader.setUniform1f("rightxv", float(rightx));
+    std::cout << "righty: " << float(righty) << std::endl;
+    shader.setUniform1f("rightyv", float(righty));
+    ofRect(0, 0, plotWidth, plotHeight);
+    std::cout << "RESULT: " << result << std::endl;
+    shader.end();
 }
 
 //--------------------------------------------------------------

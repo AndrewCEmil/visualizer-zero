@@ -28,6 +28,7 @@ class ofApp : public ofBaseApp{
         vector <float> drawBins, middleBins, audioBins;
 		
         int     plotHeight;
+        int     plotWidth;
         int     bufferSize;
 		
 		float smoothedVol;

@@ -2,12 +2,21 @@
 
 uniform mat4 modelViewProjectionMatrix;
 in vec4 position;
-uniform float myUniform;
-out float varyingtexcoord;
+uniform float leftxv;
+uniform float leftyv;
+uniform float rightxv;
+uniform float rightyv;
 
+out float leftx;
+out float lefty;
+out float rightx;
+out float righty;
 
 
 void main(){
     gl_Position = modelViewProjectionMatrix * position;
-    varyingtexcoord = myUniform;
+    leftx = leftxv;
+    lefty = leftyv;
+    rightx = rightxv;
+    righty = rightyv;
 }
