@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "ofxFft.h"
+#include "ofxUbo.h"
 
 class ofApp : public ofBaseApp{
 	
@@ -38,5 +39,5 @@ class ofApp : public ofBaseApp{
 		
         ofMutex soundMutex;
 		ofSoundStream soundStream;
-        ofShader shader;
+        ofxUboShader shader;
 };

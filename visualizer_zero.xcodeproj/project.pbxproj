@@ -11,6 +11,7 @@
 		0686C38EE993C67B96002FA1 /* kiss_fft.c in Sources */ = {isa = PBXBuildFile; fileRef = 4B053B6F1252BCFCFF0F59AC /* kiss_fft.c */; };
 		29938E05AF78B3DF7A591187 /* ofxFftw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F353204A917F4B2BCEEABE6 /* ofxFftw.cpp */; };
 		47741AD4D543009E4DF29CEA /* ofxProcessFFT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 971B530AB93ACC5065D9489E /* ofxProcessFFT.cpp */; };
+		50ADEB2B1B2BC26500DE3157 /* ofxUbo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50ADEB291B2BC26500DE3157 /* ofxUbo.cpp */; };
 		6DB9E3911BA6216FE1F0E91C /* kiss_fftr.c in Sources */ = {isa = PBXBuildFile; fileRef = DACFE8C08D7F4619176E65D7 /* kiss_fftr.c */; };
 		7A61C288AE942E5885881232 /* ofxEasyFft.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 67BFC7F21E824F5A7FAC65E0 /* ofxEasyFft.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
@@ -70,6 +71,10 @@
 		2D0C0AA4436B2A16530BA991 /* fftw3.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = fftw3.h; path = ../../../addons/ofxFft/libs/fftw/include/fftw3.h; sourceTree = SOURCE_ROOT; };
 		32CA89CD22339F4F9433CAF6 /* ofxFft.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxFft.cpp; path = ../../../addons/ofxFft/src/ofxFft.cpp; sourceTree = SOURCE_ROOT; };
 		4B053B6F1252BCFCFF0F59AC /* kiss_fft.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 30; name = kiss_fft.c; path = ../../../addons/ofxFft/libs/kiss/kiss_fft.c; sourceTree = SOURCE_ROOT; };
+		50ADEB221B2BBDE900DE3157 /* src */ = {isa = PBXFileReference; lastKnownFileType = folder; name = src; path = ../../../addons/ofxUbo/src; sourceTree = "<group>"; };
+		50ADEB291B2BC26500DE3157 /* ofxUbo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxUbo.cpp; sourceTree = "<group>"; };
+		50ADEB2A1B2BC26500DE3157 /* ofxUbo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUbo.h; sourceTree = "<group>"; };
+		50FC404F1B124532008EA04D /* bin */ = {isa = PBXFileReference; lastKnownFileType = folder; path = bin; sourceTree = "<group>"; };
 		5F353204A917F4B2BCEEABE6 /* ofxFftw.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxFftw.cpp; path = ../../../addons/ofxFft/src/ofxFftw.cpp; sourceTree = SOURCE_ROOT; };
 		67BFC7F21E824F5A7FAC65E0 /* ofxEasyFft.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxEasyFft.cpp; path = ../../../addons/ofxFft/src/ofxEasyFft.cpp; sourceTree = SOURCE_ROOT; };
 		7D3BE1A2ADAFC399E7B20A91 /* ofxFftBasic.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxFftBasic.h; path = ../../../addons/ofxFft/src/ofxFftBasic.h; sourceTree = SOURCE_ROOT; };
@@ -151,6 +156,24 @@
 			name = src;
 			sourceTree = "<group>";
 		};
+		50ADEB271B2BC26500DE3157 /* ofxUbo */ = {
+			isa = PBXGroup;
+			children = (
+				50ADEB281B2BC26500DE3157 /* src */,
+			);
+			name = ofxUbo;
+			path = ../../../addons/ofxUbo;
+			sourceTree = "<group>";
+		};
+		50ADEB281B2BC26500DE3157 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				50ADEB291B2BC26500DE3157 /* ofxUbo.cpp */,
+				50ADEB2A1B2BC26500DE3157 /* ofxUbo.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
 		72C89FAFAC11F96856792042 /* libs */ = {
 			isa = PBXGroup;
 			children = (
@@ -183,6 +206,7 @@
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				50ADEB271B2BC26500DE3157 /* ofxUbo */,
 				BBC2B4228932C2AACC6701CF /* ofxFft */,
 			);
 			name = addons;
@@ -220,6 +244,7 @@
 		BBC2B4228932C2AACC6701CF /* ofxFft */ = {
 			isa = PBXGroup;
 			children = (
+				50ADEB221B2BBDE900DE3157 /* src */,
 				14D2E3EE0233F84B1B324DD9 /* src */,
 				72C89FAFAC11F96856792042 /* libs */,
 			);
@@ -246,6 +271,7 @@
 		E4B69B4A0A3A1720003C02F2 = {
 			isa = PBXGroup;
 			children = (
+				50FC404F1B124532008EA04D /* bin */,
 				E4B6FCAD0C3E899E008CF71C /* openFrameworks-Info.plist */,
 				E4EB6923138AFD0F00A09F29 /* Project.xcconfig */,
 				E4B69E1C0A3A1BDC003C02F2 /* src */,
@@ -378,6 +404,7 @@
 				29938E05AF78B3DF7A591187 /* ofxFftw.cpp in Sources */,
 				47741AD4D543009E4DF29CEA /* ofxProcessFFT.cpp in Sources */,
 				0686C38EE993C67B96002FA1 /* kiss_fft.c in Sources */,
+				50ADEB2B1B2BC26500DE3157 /* ofxUbo.cpp in Sources */,
 				6DB9E3911BA6216FE1F0E91C /* kiss_fftr.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -433,7 +460,7 @@
 					"$(OF_CORE_LIBS)",
 					"\"../../../addons/ofxFft/libs/fftw/lib/fftw3f.a",
 				);
-				SDKROOT = macosx10.9;
+				SDKROOT = macosx10.10;
 			};
 			name = Debug;
 		};
@@ -478,7 +505,7 @@
 					"$(OF_CORE_LIBS)",
 					"\"../../../addons/ofxFft/libs/fftw/lib/fftw3f.a",
 				);
-				SDKROOT = macosx10.9;
+				SDKROOT = macosx10.10;
 			};
 			name = Release;
 		};
@@ -496,18 +523,29 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_MODEL_TUNING = NONE;
+				HEADER_SEARCH_PATHS = (
+					"$(OF_CORE_HEADERS)",
+					../../../addons/ofxFft/libs,
+					../../../addons/ofxFft/libs/fftw,
+					../../../addons/ofxFft/libs/fftw/include,
+					../../../addons/ofxFft/libs/fftw/lib,
+					../../../addons/ofxFft/libs/kiss,
+					../../../addons/ofxFft/src,
+					../../../addons/ofxUbo/src,
+				);
 				ICON = "$(ICON_NAME_DEBUG)";
 				ICON_FILE = "$(ICON_FILE_PATH)$(ICON)";
 				INFOPLIST_FILE = "openFrameworks-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = ../../../addons/ofxFft/libs/fftw/lib/;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"$(OF_CORE_LIBS)",
 					"\"../../../addons/ofxFft/libs/fftw/lib/fftw3f.a\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)Debug";
-				SDKROOT = macosx10.9;
+				SDKROOT = macosx10.10;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -525,18 +563,30 @@
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../../../libs/glut/lib/osx\"";
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_MODEL_TUNING = NONE;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				HEADER_SEARCH_PATHS = (
+					"$(OF_CORE_HEADERS)",
+					../../../addons/ofxFft/libs,
+					../../../addons/ofxFft/libs/fftw,
+					../../../addons/ofxFft/libs/fftw/include,
+					../../../addons/ofxFft/libs/fftw/lib,
+					../../../addons/ofxFft/libs/kiss,
+					../../../addons/ofxFft/src,
+					../../../addons/ofxUbo/src,
+				);
 				ICON = "$(ICON_NAME_RELEASE)";
 				ICON_FILE = "$(ICON_FILE_PATH)$(ICON)";
 				INFOPLIST_FILE = "openFrameworks-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = ../../../addons/ofxFft/libs/fftw/lib/;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"$(OF_CORE_LIBS)",
 					"\"../../../addons/ofxFft/libs/fftw/lib/fftw3f.a\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx10.9;
+				SDKROOT = macosx10.10;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

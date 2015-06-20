@@ -16,7 +16,7 @@ void ofApp::setup(){
 	soundStream.listDevices();
 	
 	//if you want to set a different device id 
-	soundStream.setDeviceID(1); //bear in mind the device id corresponds to all audio devices, including  input-only and output-only devices.
+	soundStream.setDeviceID(0); //bear in mind the device id corresponds to all audio devices, including  input-only and output-only devices.
 		
 	smoothedVol     = 0.0;
 	scaledVol		= 0.0;
